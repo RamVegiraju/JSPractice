@@ -9,24 +9,30 @@
 </head>
 
 <body>
-    <h1>Text Tokenizer</h1>
+
+    <h1>Text Analysis</h1>
 
     <textarea name="Enter your text" id="textInput" cols="30" rows="10"></textarea>
-    <button onclick="countWords()">Count Words!</button>
+    <button onclick="countWords(); lowerCase(); tokenizeText(); countUniqueWords()">Count Words!</button>
 
     <br>
     <hr>
 
+    <h3>Word Counter</h3>
     <textarea name="Length of your text" id="textOutput" cols="30" rows="10"></textarea>
 
-    <!--
-    <script>
-        var textAreaOne = document.getElementById("textInput");
-        var textAreaTwo = document.getElementById("textOutput");
-        function countWords() {
-            textAreaTwo.value = textAreaOne.value.split(' ').length;
-        }
-    </script> -->
+    <br>
+    <hr>
+
+    <h3>Lowercasing all words</h3>
+    <textarea name="lowercase" id="textLowerCase" cols="30" rows="10"></textarea>
+
+    <h3>Tokenzing the text</h3>
+    <textarea name="tokens" id="tokenizer" cols="30" rows="10"></textarea>
+
+    <h3>Counting Occurrences Traditional Way</h3>
+    <textarea name="occurrences" id="counter" cols="30" rows="10"></textarea>
+
 
 </body>
     
