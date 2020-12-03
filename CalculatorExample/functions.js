@@ -44,6 +44,12 @@ function operateFunc(sampleCalculator, operator) {
 
 
 function loadFormData() {
+
+    /**
+     * https://www.w3schools.com/jsref/jsref_parseint.asp
+     * Parse Int casts a string into an integer
+     */
+    
     var numberOne = parseInt(document.getElementById("firstNum").value);
     console.log(numberOne);
     var numberTwo = parseInt(document.getElementById("secondNum").value);
