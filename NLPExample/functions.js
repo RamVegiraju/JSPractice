@@ -41,6 +41,8 @@ function countUniqueWords() {
     var wordsMap = {}
     
     //create a JS object as a map
+    //forEach() executes a function on an array element
+    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
     arr.forEach(function(key){
         if(wordsMap.hasOwnProperty(key)){
             wordsMap[key]++
@@ -60,4 +62,9 @@ function countUniqueWords() {
     //set text area value to string with object results
     textAreaFive.value = output;
 
+}
+
+
+function countWordsFunctional() {
+    
 }
