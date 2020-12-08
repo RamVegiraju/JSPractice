@@ -251,3 +251,49 @@ if(ramVeg[interestedIn]) {
 ramVeg.location = 'USA';
 ramVeg['twitter'] = '@ramv77';
 console.log(ramVeg);
+
+
+
+//can add functions to objects as well
+const ramVeg2 = {
+    firstName: 'Ram',
+    lastName: 'Vegiraju',
+    birthYear: 1999,
+    job: 'student',
+    friendsRam: ['Michael', 'Steven', 'Peter'],
+    hasDriversLicense: true,
+
+    //any function attached to an object is called a method
+    //think of a function as a value
+    //calcAge: function(birthYear) {
+      //  return 2037 - birthYear;
+    //}
+
+    //the this keyword points to the object
+    calcAge: function() {
+        console.log(this);
+        return 2037 - this.birthYear;
+    },
+
+    // can also create a new property using the this keyWord
+
+    createAgeProp: function() {
+        this.age = 2044 - this.birthYear;
+        return this.age;
+    }
+};
+
+//can also access methods
+//console.log(ramVeg2.calcAge(1999));
+//console.log(ramVeg2['calcAge'](1999));
+
+//when using this we don't even have to input because it can access what's arleady in object throug this
+console.log(ramVeg2.calcAge());
+
+console.log(ramVeg2.calcAge());
+console.log(ramVeg2.calcAge());
+console.log(ramVeg2.calcAge());
+
+
+
+
