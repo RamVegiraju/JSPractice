@@ -52,7 +52,7 @@ const getCountryData = function (country) {
 
   //Callback
   //MUltiple AJAX calls
-/*
+
   const renderCountry = function(data, className = '') {
 
     const html = `
@@ -73,6 +73,7 @@ const getCountryData = function (country) {
       countriesContainer.style.opacity = 1;
   };
 
+  /*
   const getCountryAndNeighbor = function (country) {
     //function to take in country name and output information
 
@@ -139,6 +140,64 @@ const getCountryData = function (country) {
 //request.send();
 
 //fetch returns a PROMISE
-const request = fetch('https://restcountries.eu/rest/v2/name/portugal');
-console.log(request);
+//const request = fetch('https://restcountries.eu/rest/v2/name/portugal');
+//console.log(request);
+
+//once we make the fetch call and get a promise, we use a then method for a callback function
+//then methods are associated with promises
+
+/*
+const getCountryData = function(country) {
+  fetch(`https://restcountries.eu/rest/v2/name/${country}`).then(function(response) {
+    console.log(response);
+    //json method is available on all responses/results from a fetch call
+    //the json function is also asychronous so it returns a promise
+    return response.json();
+    //need to handle this promise as well with another then
+  }).then(function(data){
+    console.log(data);
+    renderCountry(data[0]);
+  })
+}; */
+
+//simplifying with arrow functions
+//still using callbacks but get rid of callback hell
+//chaining promises to get the neighboring country
+//then method always returns a promise
+//the value we return becomes the fulfilled value of the promise
+//never want both nested in the same then method, this returns to callback hell
+
+
+///Handling Rejected Promises
+
+const getCountryData = function(country) {
+  //Country 1
+  fetch(`https://restcountries.eu/rest/v2/name/${country}`)
+    .then(response => response.json(), 
+    //second function to handle error or catch error
+    err => alert(err)
+    )
+    .then(data => {
+      renderCountry(data[0]);
+      const neighbour = data[0].borders[0];
+      if(!neighbour) return;
+
+      //Country neighbour call for country 2
+      return fetch(`https://restcountries.eu/rest/v2/alpha/${neighbour}`);
+    })
+    //response is what we are returning from the previous then, using response to categorize a promise because a promise is returned from the fetch call
+    .then(response => response.json())
+    .then(data => renderCountry(data, 'neighbour'));
+};
+
+btn.addEventListener('click', function() {
+  getCountryData('portugal');
+});
+
+
+
+
+
+
+
 
