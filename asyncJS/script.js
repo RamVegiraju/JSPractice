@@ -170,16 +170,20 @@ const getCountryData = function(country) {
 
 ///Handling Rejected Promises
 
+//function to render the error on screen
+const renderError = function(msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  countriesContainer.style.opacity = 1;
+}
+
 const getCountryData = function(country) {
   //Country 1
   fetch(`https://restcountries.eu/rest/v2/name/${country}`)
-    .then(response => response.json(), 
-    //second function to handle error or catch error
-    err => alert(err)
-    )
+    .then(response => response.json())
     .then(data => {
       renderCountry(data[0]);
       const neighbour = data[0].borders[0];
+
       if(!neighbour) return;
 
       //Country neighbour call for country 2
@@ -187,12 +191,23 @@ const getCountryData = function(country) {
     })
     //response is what we are returning from the previous then, using response to categorize a promise because a promise is returned from the fetch call
     .then(response => response.json())
-    .then(data => renderCountry(data, 'neighbour'));
+    .then(data => renderCountry(data, 'neighbour'))
+    //catching the error, errors propagate down the chain
+    .catch(err => {
+      console.error(`${err}`);
+      renderError(`Something went wrong ${err.message}. Try again!`);
+  })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    })
 };
 
 btn.addEventListener('click', function() {
-  getCountryData('portugal');
+  getCountryData('india');
 });
+
+//cannot read a countyr like this that does not exist
+getCountryData('asjkdnslajk')
 
 
 
