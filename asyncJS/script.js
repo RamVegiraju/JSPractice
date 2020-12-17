@@ -217,6 +217,7 @@ btn.addEventListener('click', function() {
 //Event Loop in Practice
 
 //sychnronous events run first as expected
+/*
 console.log('Test start'); //first output
 setTimeout(() => console.log('O sec timer'), 0); //last output takes second priority to microtasks queue
 Promise.resolve('Resolved promise 1').then(res => console.log(res)); //third output promise takes first priority (microtasks queue)
@@ -229,11 +230,107 @@ Promise.resolve('Resolved promise 2').then(res => {
   console.log(res);
 });
 
-console.log('Test end'); //second output 
+console.log('Test end'); //second output */
+
+
+
+//Building a Simple Promise
+
+//promise constructor (just a special object in JS)
+//takes in one arg: executor function which takes in resolve reject functions to mark the promise
+/*
+const lotteryPromise = new Promise(function(resolve, reject) {
+  //fulfilled promise, set as fulfilled with a resolve function
+  
+  console.log('Lottery draw is happening ');
+  setTimeout(function() {
+    if(Math.random() >= 0.5) {
+      resolve('You WIN');
+    }else {
+      reject(new Error('You lost your money'));
+    }
+  },2000)
+});
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+
+
+//promisfy setTimeout function
+const wait = function(seconds) {
+  return new Promise(function(resolve){
+    setTimeout(resolve, )
+  })
+}*/
 
 
 
 
+//Consuming Promises with Async & AWAIT
+//Inside an async function can have one or more await function
+
+/*
+const whereAmI = async function(country) {
+
+  //await keyword stops code execution at this point till the promise is fulfilled
+  //stopping execution in async function is not a problem, it is already running asynchronously
+  //before we had to use callback functions/ use the then method
+  //looks a lot more like synchronous code
+  //async await is just syntactic sugar of the then method
+  const res = await fetch(`https://restcountries.eu/rest/v2/name/${country}`);
+  console.log(res);
+  const data = await res.json(); //returns a new promise normally we would chain another then 
+  console.log(data);
+  renderCountry(data[0]);
+};
+
+whereAmI('portugal');
+console.log('FIRST'); */
+
+/*
+Simple try catch example
+try {
+  let y = 1;
+  const x = 2;
+  x = 3; //cannot reassign a constant
+  //if no error we get no error
+} catch(err) {
+  alert(err.message); //error of assignment to constant variable, script does not die
+} 
+*/
 
 
 
+///try catch w async functions
+/*
+const whereAmI = async function () {
+  try {
+    // Geolocation
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
+    // Reverse geocoding
+    const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    if (!resGeo.ok) throw new Error('Problem getting location data');
+    const dataGeo = await resGeo.json();
+    console.log(dataGeo);
+    // Country data
+    const res = await fetch(
+      `https://restcountries.eu/rest/v2/name/${dataGeo.country}`
+    );
+    if (!resGeo.ok) throw new Error('Problem getting country');
+    const data = await res.json();
+    console.log(data);
+    renderCountry(data[0]);
+  } catch (err) {
+    console.error(`${err} 💥`);
+    renderError(`💥 ${err.message}`);
+  }
+};
+
+whereAmI();
+whereAmI();
+whereAmI();
+console.log('FIRST');
+*/
+
+
+//Returning values from async functions
