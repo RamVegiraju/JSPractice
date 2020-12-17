@@ -176,6 +176,8 @@ const renderError = function(msg) {
   countriesContainer.style.opacity = 1;
 }
 
+/*
+
 const getCountryData = function(country) {
   //Country 1
   fetch(`https://restcountries.eu/rest/v2/name/${country}`)
@@ -204,11 +206,30 @@ const getCountryData = function(country) {
 
 btn.addEventListener('click', function() {
   getCountryData('india');
-});
+}); */
+
 
 //cannot read a countyr like this that does not exist
-getCountryData('asjkdnslajk')
+//getCountryData('asjkdnslajk')
 
+
+
+//Event Loop in Practice
+
+//sychnronous events run first as expected
+console.log('Test start'); //first output
+setTimeout(() => console.log('O sec timer'), 0); //last output takes second priority to microtasks queue
+Promise.resolve('Resolved promise 1').then(res => console.log(res)); //third output promise takes first priority (microtasks queue)
+
+Promise.resolve('Resolved promise 2').then(res => {
+  //microtask takes a long time looping through a larger number
+  //the function in the callback queue will be delayed now till this is done
+  for (let i = 0; i < 10000000; i++) {
+  }
+  console.log(res);
+});
+
+console.log('Test end'); //second output 
 
 
 
