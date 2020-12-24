@@ -276,7 +276,6 @@ const ramVeg2 = {
     },
 
     // can also create a new property using the this keyWord
-
     createAgeProp: function() {
         this.age = 2044 - this.birthYear;
         return this.age;
@@ -288,12 +287,163 @@ const ramVeg2 = {
 //console.log(ramVeg2['calcAge'](1999));
 
 //when using this we don't even have to input because it can access what's arleady in object throug this
-console.log(ramVeg2.calcAge());
+//console.log(ramVeg2.calcAge());
 
-console.log(ramVeg2.calcAge());
-console.log(ramVeg2.calcAge());
-console.log(ramVeg2.calcAge());
-
-
+//console.log(ramVeg2.calcAge());
+//console.log(ramVeg2.calcAge());
+//console.log(ramVeg2.calcAge());
 
 
+
+
+
+
+
+//Iteration
+//For loops
+
+//violates don't repeat yourself principle
+//Example lifting weight at the gym
+
+/*
+console.log('Lifting weights repeition 1');
+console.log('Lifting weights repeition 2');
+console.log('Lifting weights repeition 3');
+console.log('Lifting weights repeition 4');
+console.log('Lifting weights repeition 5');
+console.log('Lifting weights repeition 6');
+console.log('Lifting weights repeition 7');
+console.log('Lifting weights repeition 8');
+console.log('Lifting weights repeition 9');
+console.log('Lifting weights repeition 10');
+*/
+
+//for loop keeps running while condition is true
+/*
+for(let rep = 1; rep <= 10; rep++) {
+    console.log(`Lifting weights repetiton ${rep}`);
+}*/
+
+
+
+//Iterating arrays
+
+const ramArr = [
+    'Ram',
+    'Vegiraju',
+    2037-1991,
+    'student',
+    ['Michael', 'Peter', 'Steven']
+];
+
+//array to hold types
+const types = [];
+
+//without loop
+//console.log(ram[0])
+//console.log(ram[1])
+//console.log(ram[2])
+//console.log(ram[3])
+//console.log(ram[4])
+
+//counter variable should always stay below 5
+//or the maximum array length
+for(let i = 0; i < ramArr.length; i++) {
+    //Reading array
+    //console.log(ramArr[i], typeof ramArr[i]);
+
+    //new array to hold types of variables
+    //types[i] = typeof ramArr[i];
+
+    //another method is push 
+    types.push(typeof ramArr[i])
+}
+
+//console.log(types);
+
+
+//calculate ages for each birth year
+const yearsArr = [1991, 2007, 1969, 2020];
+const ages = [];
+
+for (let i = 0; i < yearsArr.length; i++) {
+    ages.push(2037 - yearsArr[i]);
+}
+//console.log(ages);
+
+
+
+// continue and break
+
+//continue
+//console.log('----------Only Strings');
+for(let i = 0; i < ramArr.length; i++) {
+    //if the item is not a string then continue, exit current iteration and start next iteration
+    if(typeof ramArr[i] !== 'string') continue;
+
+    //console.log(ramArr[i], typeof ramArr[i]);
+}
+
+
+//break terminates the entire loop
+//console.log('----------BREAK WITH NUMBER------');
+for(let i = 0; i < ramArr.length; i++) {
+    //if the item is not a string then continue, exit current iteration and start next iteration
+    if(typeof ramArr[i] === 'number') break;
+
+    //console.log(ramArr[i], typeof ramArr[i]);
+}
+
+
+//Looping backwards
+//Normally start at index 0, 1, ..., 4
+//Now we want 4,3, .... , 0
+
+for (let i = ramArr.length - 1; i >= 0; i--) {
+    //console.log(i, ramArr[i]);
+}
+
+
+//loops within loops example
+//should have 15 repetitions
+
+for (let exercise = 1; exercise < 4; exercise++) {
+    //console.log(`---------Starting exercise ${exercise}`);
+
+    for (let rep = 1; rep <= 6; rep++) {
+        console.log(`Exercise ${exercise} Lifting weights repetition ${rep}`);
+    }
+}
+
+
+
+//While loop
+
+//for loop for comparision
+//console.log("----------For LOOP--------")
+for(let rep = 1; rep <= 10; rep++) {
+    //console.log(`Lifting weights repetiton ${rep}`);
+}
+
+//still need same components for a while loop
+//all the while loop really needs is the condition
+
+//console.log("----------WHILE LOOP--------")
+let rep = 1;
+while(rep <= 10) {
+    //console.log(`Lifting weights repetiton ${rep}`);
+    rep++;
+}
+
+
+//Example: Want to roll dice till it is 6
+
+//random number between 1 to 6 for example
+let dice = Math.trunc(Math.random() * 6) +1;
+console.log(dice);
+
+while(dice !== 6) {
+    console.log(`You rolled a ${dice}`);
+    dice = Math.trunc(Math.random() * 6) +1;
+    if (dice === 6) console.log('Loop is about to end ....');
+}
